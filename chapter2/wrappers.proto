@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+message Int32Value {
+  int32 value = 1;
+}
+
+message SInt32Value {
+  sint32 value = 1;
+}
+
+message Int64Value {
+  int64 value = 1;
+}
+
+message SInt64Value {
+  sint64 value = 1;
+}
+
+message Fixed32Value {
+  fixed32 value = 1;
+}
+
+message Fixed64Value {
+  fixed64 value = 1;
+}
+
+message FloatValue {
+  float value = 1;
+}
+
+message DoubleValue {
+  double value = 1;
+}
+
+message SFixed32Value {
+  sfixed32 value = 1;
+}
+
+message SFixed64Value {
+  sfixed64 value = 1;
+}
+
+message StringValue {
+  string value = 1;
+}
+
+message RepeatedUInt64Values {
+  repeated uint64 values = 1;
+}
