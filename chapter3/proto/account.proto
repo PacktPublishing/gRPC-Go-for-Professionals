@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3/proto";
+
+message Account {
+  uint64 id = 1;
+  string username = 2;
+}
+
+message LogoutRequest {
+  Account account = 1;
+}
+
+message LogoutResponse {}
+
+service AccountService {
+  rpc Logout (LogoutRequest) returns (LogoutResponse);
+}
