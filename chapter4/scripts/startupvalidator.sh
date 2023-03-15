@@ -39,12 +39,12 @@ assert_contain() {
   fi
 }
 
-stderr=$(go run server/main.go 2>&1)
-assert_contain "$stderr" "usage: server" "check go run server/main.go"
+stderr=$(go run ./server 2>&1)
+assert_contain "$stderr" "usage: server" "check go run ./server"
 stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //server:server 2>&1)
 assert_contain "$stderr" "usage: server" "check bazel run //server:server"
 
-stderr=$(go run client/main.go 2>&1)
-assert_contain "$stderr" "usage: client" "check go run client/main.go"
+stderr=$(go run ./client 2>&1)
+assert_contain "$stderr" "usage: client" "check go run ./client"
 stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //client:client 2>&1)
 assert_contain "$stderr" "usage: client" "check bazel run //client:client"
