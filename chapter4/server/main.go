@@ -1,0 +1,37 @@
+package main
+
+import (
+	"log"
+	"net"
+	"os"
+
+	"google.golang.org/grpc"
+)
+
+func main() {
+	args := os.Args[1:]
+
+	if len(args) == 0 {
+		log.Fatalln("usage: server [IP_ADDR]")
+	}
+
+	addr := args[0]
+	lis, err := net.Listen("tcp", addr)
+
+	if err != nil {
+		log.Fatalf("failed to listen: %v\n", err)
+	}
+
+	defer lis.Close()
+	log.Printf("listening at %s\n", addr)
+
+	opts := []grpc.ServerOption{}
+	s := grpc.NewServer(opts...)
+
+	//registration of endpoints
+
+	defer s.Stop()
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v\n", err)
+	}
+}
