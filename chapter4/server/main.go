@@ -22,10 +22,15 @@ func main() {
 		log.Fatalf("failed to listen: %v\n", err)
 	}
 
-	defer lis.Close()
+	defer func(lis net.Listener) {
+		err := lis.Close()
+		if err != nil {
+			log.Fatalf("unexpected error: %v", err)
+		}
+	}(lis)
 	log.Printf("listening at %s\n", addr)
 
-	opts := []grpc.ServerOption{}
+	var opts []grpc.ServerOption
 	s := grpc.NewServer(opts...)
 
 	//registration of endpoints
