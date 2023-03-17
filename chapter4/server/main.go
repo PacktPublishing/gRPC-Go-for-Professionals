@@ -23,8 +23,7 @@ func main() {
 	}
 
 	defer func(lis net.Listener) {
-		err := lis.Close()
-		if err != nil {
+		if err := lis.Close(); err != nil {
 			log.Fatalf("unexpected error: %v", err)
 		}
 	}(lis)

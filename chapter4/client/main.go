@@ -26,8 +26,7 @@ func main() {
 	}
 
 	defer func(conn *grpc.ClientConn) {
-		err := conn.Close()
-		if err != nil {
+		if err := conn.Close(); err != nil {
 			log.Fatalf("unexpected error: %v", err)
 		}
 	}(conn)
