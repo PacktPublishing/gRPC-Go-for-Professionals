@@ -4,8 +4,11 @@
 pwd=$(pwd)
 for nb in 4 5 6
 do
-	echo "enter $pwd/chapter$nb"
-	cd $pwd/chapter$nb
-	find proto -name "*.pb.go" -type f -exec rm -rf '{}' \;
-	bazel clean --expunge
+	if [ -d "$pwd/chapter$nb" ]
+	then
+		echo "enter $pwd/chapter$nb"
+		cd $pwd/chapter$nb
+		find proto -name "*.pb.go" -type f -exec rm -rf '{}' \;
+		bazel clean --expunge
+	fi
 done
