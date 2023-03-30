@@ -8,7 +8,7 @@ on:
 jobs:
   generate_badge:
     runs-on: ubuntu-latest
-    name: badge_generation
+    name: updates
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,11 +18,23 @@ jobs:
         with:
           path: "~/.cache/bazel"
           key: bazel
+      - uses: actions/setup-go@v4.0.0
+        with:
+          go-version: '^1.20'
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v1.1.2
+        with:
+          version: '3.x'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install gRPC Go plugins
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
       - name: Run Update
         run: make update
       - name: Run Validate
         run: make validate
-      - name: Commit the badge (if it changed)
+      - name: Commit the udpates (if it changed)
         run: |
           if [[ `git status --porcelain` ]]; then
             git config --global user.name 'Clement Jean'
