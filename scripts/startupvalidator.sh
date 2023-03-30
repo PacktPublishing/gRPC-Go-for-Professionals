@@ -39,12 +39,20 @@ assert_contain() {
   fi
 }
 
-stderr=$(go run ./server 2>&1)
-assert_contain "$stderr" "usage: server" "check go run ./server"
-stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //server:server 2>&1)
-assert_contain "$stderr" "usage: server" "check bazel run //server:server"
+pwd=$(pwd)
+for nb in 4 5 6
+do
+	echo "enter $pwd/chapter$nb"
+	cd $pwd/chapter$nb
+	find proto -type f -name "*.proto" -exec protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative {} ";"
 
-stderr=$(go run ./client 2>&1)
-assert_contain "$stderr" "usage: client" "check go run ./client"
-stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //client:client 2>&1)
-assert_contain "$stderr" "usage: client" "check bazel run //client:client"
+	stderr=$(go run ./server 2>&1)
+	assert_contain "$stderr" "usage: server" "check go run ./server"
+	stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //server:server 2>&1)
+	assert_contain "$stderr" "usage: server" "check bazel run //server:server"
+
+	stderr=$(go run ./client 2>&1)
+	assert_contain "$stderr" "usage: client" "check go run ./client"
+	stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //client:client 2>&1)
+	assert_contain "$stderr" "usage: client" "check bazel run //client:client"
+done
