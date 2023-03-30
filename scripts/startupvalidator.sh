@@ -3,14 +3,40 @@
 # Note: assert_contains was slightly modified but the original
 # code comes from: https://github.com/torokmark/assert.sh
 
-if command -v tput &>/dev/null && tty -s; then
+__COLOR=false
+
+while getopts ':c' 'OPTKEY'; do
+	case ${OPTKEY} in
+		'c')
+			__COLOR=true
+			;;
+		'?')
+			echo "INVALID OPTION -- ${OPTARG}" >&2
+			exit 1
+			;;
+		':')
+			echo "MISSING ARGUMENT for option -- ${OPTARG}" >&2
+			exit 1
+			;;
+		*)
+			echo "UNIMPLEMENTED OPTION -- ${OPTKEY}" >&2
+			exit 1
+			;;
+	esac
+done
+
+if ${__COLOR} && command -v tput &>/dev/null && tty -s ; then
   RED=$(tput setaf 1)
   GREEN=$(tput setaf 2)
   NORMAL=$(tput sgr0)
-else
+elif ${__COLOR}; then
   RED=$(echo -en "\e[31m")
   GREEN=$(echo -en "\e[32m")
   NORMAL=$(echo -en "\e[00m")
+else
+  RED=""
+  GREEN=""
+  NORMAL=""
 fi
 
 log_success() {
