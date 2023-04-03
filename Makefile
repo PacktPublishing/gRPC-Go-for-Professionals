@@ -1,7 +1,7 @@
 all:
 
 validate:
-	./scripts/startupvalidator.sh
+	./scripts/startupvalidator.sh -c
 
 update:
 	./scripts/updateall.sh
