@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package todo.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter5/proto/todo/v1";
+
+message Task {
+  uint64 id = 1;
+  string description = 2;
+  bool done = 3;
+  google.protobuf.Timestamp due_date = 4;
+}
+
+message AddTaskRequest {
+  string description = 1;
+  google.protobuf.Timestamp due_date = 2;
+}
+
+message AddTaskResponse {
+  uint64 id = 1;
+}
+
+message ListTasksRequest {
+}
+
+message ListTasksResponse {
+  Task task = 1;
+  bool overdue = 2;
+}
+
+message UpdateTasksRequest {
+  Task task = 1;
+}
+
+message UpdateTasksResponse {
+}
+
+message DeleteTasksRequest {
+  uint64 id = 1;
+}
+
+message DeleteTasksResponse {
+}
+
+service TodoService {
+  rpc AddTask(AddTaskRequest) returns (AddTaskResponse);
+  rpc ListTasks(ListTasksRequest) returns (stream ListTasksResponse);
+  rpc UpdateTasks(stream UpdateTasksRequest) returns (UpdateTasksResponse);
+  rpc DeleteTasks(stream DeleteTasksRequest) returns (stream DeleteTasksResponse);
+}
