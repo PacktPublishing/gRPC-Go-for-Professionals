@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"io"
-	"log"
 	"time"
 
 	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter5/proto/todo/v1"
@@ -24,11 +23,7 @@ func (s *server) ListTasks(req *pb.ListTasksRequest, stream pb.TodoService_ListT
 			Overdue: overdue,
 		})
 
-		if err != nil {
-			return err
-		}
-
-		return nil
+		return err
 	})
 }
 
@@ -41,7 +36,7 @@ func (s *server) UpdateTasks(stream pb.TodoService_UpdateTasksServer) error {
 		}
 
 		if err != nil {
-			log.Fatalf("error while reading client stream: %v\n", err)
+			return err
 		}
 
 		s.d.updateTask(
@@ -62,7 +57,7 @@ func (s *server) DeleteTasks(stream pb.TodoService_DeleteTasksServer) error {
 		}
 
 		if err != nil {
-			log.Fatalf("error while reading client stream: %v\n", err)
+			return err
 		}
 
 		s.d.deleteTask(req.Id)

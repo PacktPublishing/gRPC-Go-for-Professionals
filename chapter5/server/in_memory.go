@@ -30,9 +30,7 @@ func (d *inMemoryDb) addTask(description string, dueDate time.Time) (uint64, err
 
 func (d *inMemoryDb) getTasks(f func(interface{}) error) error {
 	for _, task := range d.tasks {
-		err := f(task)
-
-		if err != nil {
+		if err := f(task); err != nil {
 			return err
 		}
 	}
