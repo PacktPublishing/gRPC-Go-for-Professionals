@@ -30,13 +30,7 @@ func addTask(c pb.TodoServiceClient, description string, dueDate time.Time) uint
 	return res.Id
 }
 
-func printTasks(c pb.TodoServiceClient) {
-	fm, err := fieldmaskpb.New(&pb.Task{}, "id")
-
-	if err != nil {
-		log.Fatalf("unexpected error: %v", err)
-	}
-
+func printTasks(c pb.TodoServiceClient, fm *fieldmaskpb.FieldMask) {
 	req := &pb.ListTasksRequest{
 		Mask: fm,
 	}
@@ -151,6 +145,11 @@ func main() {
 	}(conn)
 
 	c := pb.NewTodoServiceClient(conn)
+	fm, err := fieldmaskpb.New(&pb.Task{}, "id")
+
+	if err != nil {
+		log.Fatalf("unexpected error: %v", err)
+	}
 
 	fmt.Println("--------ADD--------")
 	dueDate := time.Now().Add(5 * time.Second)
@@ -160,7 +159,7 @@ func main() {
 	fmt.Println("-------------------")
 
 	fmt.Println("--------LIST-------")
-	printTasks(c)
+	printTasks(c, fm)
 	fmt.Println("-------------------")
 
 	fmt.Println("-------UPDATE------")
@@ -169,7 +168,7 @@ func main() {
 		{Id: id2, DueDate: timestamppb.New(dueDate.Add(5 * time.Hour))},
 		{Id: id3, Done: true},
 	}...)
-	printTasks(c)
+	printTasks(c, fm)
 	fmt.Println("-------------------")
 
 	fmt.Println("-------DELETE------")
@@ -179,6 +178,6 @@ func main() {
 		{Id: id3},
 	}...)
 
-	printTasks(c)
+	printTasks(c, fm)
 	fmt.Println("-------------------")
 }
