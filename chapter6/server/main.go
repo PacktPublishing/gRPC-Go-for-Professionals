@@ -31,14 +31,14 @@ func main() {
 		}
 	}(lis)
 
-	log.Printf("listening at %s\n", addr)
-
 	var opts []grpc.ServerOption
 	s := grpc.NewServer(opts...)
 
 	pb.RegisterTodoServiceServer(s, &server{
 		d: New(),
 	})
+
+	log.Printf("listening at %s\n", addr)
 
 	defer s.Stop()
 	if err := s.Serve(lis); err != nil {

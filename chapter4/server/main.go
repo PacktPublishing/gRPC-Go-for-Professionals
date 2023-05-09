@@ -27,12 +27,13 @@ func main() {
 			log.Fatalf("unexpected error: %v", err)
 		}
 	}(lis)
-	log.Printf("listening at %s\n", addr)
 
 	var opts []grpc.ServerOption
 	s := grpc.NewServer(opts...)
 
 	//registration of endpoints
+
+	log.Printf("listening at %s\n", addr)
 
 	defer s.Stop()
 	if err := s.Serve(lis); err != nil {
