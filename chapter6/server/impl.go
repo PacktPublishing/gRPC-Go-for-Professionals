@@ -14,7 +14,7 @@ import (
 )
 
 func Filter(msg proto.Message, mask *fieldmaskpb.FieldMask) {
-	if len(mask.Paths) == 0 {
+	if mask == nil || len(mask.Paths) == 0 {
 		return
 	}
 
@@ -39,7 +39,7 @@ func (s *server) ListTasks(req *pb.ListTasksRequest, stream pb.TodoService_ListT
 
 		Filter(task, req.Mask)
 
-		overdue := task.DueDate != nil && !task.Done && task.DueDate.AsTime().Before(time.Now())
+		overdue := task.DueDate != nil && !task.Done && task.DueDate.AsTime().Before(time.Now().UTC())
 		err := stream.Send(&pb.ListTasksResponse{
 			Task:    task,
 			Overdue: overdue,
