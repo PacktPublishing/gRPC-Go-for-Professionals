@@ -12,7 +12,7 @@ GO_VERSION = "1.20.2"
 # Rules_go
 # The last version and SHA256 can be found here: https://github.com/bazelbuild/rules_go/releases
 RULES_GO_VERSION = "v0.39.0"
-RULES_GO_SHA256 = "dd926a88a564a9246713a9c00b35315f54cbd46b31a26d5d8fb264c07045f05d"
+RULES_GO_SHA256 = "6b65cb7917b4d1709f9410ffe00ecf3e160edf674b78c54a894471320862184f"
 
 # Gazelle
 # The last version and SHA256 can be found here: https://github.com/bazelbuild/bazel-gazelle/blob/master/README.rst
