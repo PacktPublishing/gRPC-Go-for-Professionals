@@ -66,7 +66,7 @@ assert_contain() {
 }
 
 pwd=$(pwd)
-for nb in 4 5 6
+for nb in 4 5 6 7
 do
   if [ -d "$pwd/chapter$nb" ]
 	then
