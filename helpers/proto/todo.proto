@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package todo;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto";
+
+message Task {
+  uint64 id = 1;
+  string description = 2;
+  bool done = 3;
+  google.protobuf.Timestamp due_date = 4;
+}
