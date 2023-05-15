@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"unsafe"
 
 	"golang.org/x/exp/constraints"
@@ -11,7 +12,12 @@ import (
 )
 
 func serializedSize[D constraints.Integer, W protoreflect.ProtoMessage](data D, wrapper W) (uintptr, int) {
-	out, _ := proto.Marshal(wrapper)
+	out, err := proto.Marshal(wrapper)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	return unsafe.Sizeof(data), len(out) - 1
 }
 
