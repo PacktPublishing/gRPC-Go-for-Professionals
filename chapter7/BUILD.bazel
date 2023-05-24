@@ -1,5 +1,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
+# gazelle:exclude proto/**/*.go
 # gazelle:prefix github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter7
 gazelle(name = "gazelle")
 
