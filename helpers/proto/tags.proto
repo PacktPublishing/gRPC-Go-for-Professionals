@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto";
+
+message Tags {
+  int32 tag = 1;
+  int32 tag2 = 16;
+  int32 tag3 = 2048;
+  int32 tag4 = 262144;
+  int32 tag5 = 33554432;
+  int32 tag6 = 536870911;
+}
