@@ -3,6 +3,8 @@
 # Note: assert_contains was slightly modified but the original
 # code comes from: https://github.com/torokmark/assert.sh
 
+source ./scripts/constants.sh
+
 __COLOR=false
 
 while getopts ':c' 'OPTKEY'; do
@@ -66,7 +68,7 @@ assert_contain() {
 }
 
 pwd=$(pwd)
-for nb in 4 5 6 7
+for nb in ${CHAPTERS_NB[@]}
 do
   if [ -d "$pwd/chapter$nb" ]
 	then

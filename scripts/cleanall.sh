@@ -1,8 +1,12 @@
 # This script is for maintenance of the projects.
 # It cleans the different folders by removing
 # generated code and bazel builds.
+
+source ./scripts/constants.sh
+
 pwd=$(pwd)
-for nb in 4 5 6 7
+
+for nb in ${CHAPTERS_NB[@]}
 do
 	if [ -d "$pwd/chapter$nb" ]
 	then
