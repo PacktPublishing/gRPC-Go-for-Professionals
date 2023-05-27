@@ -74,7 +74,7 @@ do
 	then
     echo "enter $pwd/chapter$nb"
     cd $pwd/chapter$nb
-    find proto -type f -name "*.proto" -exec protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative {} ";"
+    find proto -type f -name "*.proto" -exec protoc -Iproto --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative {} ";"
 
     stderr=$(go run ./server 2>&1)
     assert_contain "$stderr" "usage: server" "check go run ./server"
