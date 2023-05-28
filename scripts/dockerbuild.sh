@@ -1,4 +1,5 @@
-# This is supposed to be run inside a chapter folder
+# This script is for maintenance of the projects.
+# It is supposed to be run inside a chapter folder.
 
 # If the buildx node is not created, uncomment the line below
 # sudo docker buildx create  --name mybuild --driver=docker-container

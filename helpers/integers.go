@@ -11,6 +11,10 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
+// serializedSize calculates the size in memory of data
+// and the size after Protobuf serialization of the wrapper.
+// It returns two values. The number of bytes for data in memory
+// and the number of bytes after serialization of wrapper - 1 (removes the byte for tag + wire type).
 func serializedSize[D constraints.Integer, W protoreflect.ProtoMessage](data D, wrapper W) (uintptr, int) {
 	out, err := proto.Marshal(wrapper)
 

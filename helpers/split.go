@@ -10,6 +10,8 @@ import (
 	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto"
 )
 
+// serializedSize calculates the serialized size of the msg.
+// It returns the number of bytes in which the msg was serialized.
 func serializedSize[M protoreflect.ProtoMessage](msg M) int {
 	out, err := proto.Marshal(msg)
 

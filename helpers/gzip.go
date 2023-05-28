@@ -14,6 +14,9 @@ import (
 	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto"
 )
 
+// compressedSize calculates the number of bytes after compression with gzip.
+// It returns two values. The number of bytes the msg takes after serialization
+// and the number of bytes after compression.
 func compressedSize[M protoreflect.ProtoMessage](msg M) (int, int) {
 	var b bytes.Buffer
 	gz := gzip.NewWriter(&b)
