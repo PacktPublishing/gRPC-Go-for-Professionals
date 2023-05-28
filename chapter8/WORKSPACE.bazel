@@ -1,13 +1,14 @@
 workspace(name = "github_com_packtpublishing_implementing_gRPC_in_Golang_Microservice")
 
-load("//:versions.bzl",
-    "GO_VERSION",
-    "RULES_GO_VERSION",
-    "RULES_GO_SHA256",
-    "GAZELLE_VERSION",
+load(
+    "//:versions.bzl",
     "GAZELLE_SHA256",
+    "GAZELLE_VERSION",
+    "GO_VERSION",
+    "PROTOC_GEN_VALIDATE_VERSION",
     "PROTO_VERSION",
-    "PROTOC_GEN_VALIDATE_VERSION"
+    "RULES_GO_SHA256",
+    "RULES_GO_VERSION",
 )
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
@@ -48,8 +49,8 @@ gazelle_dependencies(go_repository_default_config = "//:WORKSPACE.bazel")
 # Protobuf
 git_repository(
     name = "com_google_protobuf",
+    remote = "https://github.com/protocolbuffers/protobuf",
     tag = PROTO_VERSION,
-    remote = "https://github.com/protocolbuffers/protobuf"
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -59,8 +60,8 @@ protobuf_deps()
 # protoc-gen-validate
 git_repository(
     name = "com_envoyproxy_protoc_gen_validate",
+    remote = "https://github.com/bufbuild/protoc-gen-validate",
     tag = PROTOC_GEN_VALIDATE_VERSION,
-    remote = "https://github.com/bufbuild/protoc-gen-validate"
 )
 
 load("@com_envoyproxy_protoc_gen_validate//bazel:repositories.bzl", "pgv_dependencies")
