@@ -1,0 +1,1 @@
+/Users/clement/Git/Implementing-gRPC-in-Golang-Microservice/versions.bzl

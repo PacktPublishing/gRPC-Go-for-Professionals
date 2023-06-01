@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: todo-client
+spec:
+  containers:
+  - name: todo-client
+    image: clementjean/packt-book:client
+    # imagePullPolicy: Always
+  restartPolicy: Never
