@@ -2,7 +2,7 @@
 # It updates all the dependencies for the different
 # go projects.
 
-source ./scripts/constants.sh
+. ./scripts/constants.sh
 
 pwd=$(pwd)
 
