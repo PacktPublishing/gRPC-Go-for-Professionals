@@ -5,7 +5,7 @@ go 1.20
 replace github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto => ../proto
 
 require (
-	github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto v0.0.0-20230528084446-6d5b8cf9c033
+	github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto v0.0.0-20230601065932-82c46f0a6947
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.5
 	google.golang.org/grpc v1.55.0
 	google.golang.org/protobuf v1.30.0
