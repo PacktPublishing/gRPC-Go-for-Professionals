@@ -75,19 +75,19 @@ do
   if [ -d "$pwd/chapter$nb" ]
 	then
     echo "enter $pwd/chapter$nb"
-    pushd $pwd/chapter$nb
+    cd $pwd/chapter$nb
     protoc -Iproto --go_out=proto --go_opt=paths=source_relative --go-grpc_out=proto --go-grpc_opt=paths=source_relative --validate_out="lang=go,paths=source_relative:proto" $(find . -type f -name "*.proto")
 
     stderr=$(go run ./server 2>&1)
     assert_contain "$stderr" "usage: server" "check go run ./server"
-    popd
+    cd $pwd
     stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //chapter$nb/server:server 2>&1)
     assert_contain "$stderr" "usage: server" "check bazel run //chapter$nb/server:server"
 
-    pushd $pwd/chapter$nb
+    cd $pwd/chapter$nb
     stderr=$(go run ./client 2>&1)
     assert_contain "$stderr" "usage: client" "check go run ./client"
-    popd
+    cd $pwd
     stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //chapter$nb/client:client 2>&1)
     assert_contain "$stderr" "usage: client" "check bazel run //chapter$nb/client:client"
   fi
