@@ -4,11 +4,11 @@
 # It cleans the different folders by removing
 # generated code and bazel builds.
 
-source ./scripts/constants.sh
+. ./scripts/constants.sh
 
 pwd=$(pwd)
 
-for nb in ${CHAPTERS_NB[@]}
+for nb in $CHAPTERS_NB
 do
 	if [ -d "$pwd/chapter$nb" ]
 	then

@@ -5,7 +5,7 @@
 # Note: assert_contains was slightly modified but the original
 # code comes from: https://github.com/torokmark/assert.sh
 
-source ./scripts/constants.sh
+. ./scripts/constants.sh
 
 __COLOR=false
 
@@ -70,22 +70,25 @@ assert_contain() {
 }
 
 pwd=$(pwd)
-for nb in ${CHAPTERS_NB[@]}
+for nb in $CHAPTERS_NB
 do
   if [ -d "$pwd/chapter$nb" ]
 	then
     echo "enter $pwd/chapter$nb"
-    cd $pwd/chapter$nb
+    pushd $pwd/chapter$nb
     buf generate proto
 
     stderr=$(go run ./server 2>&1)
     assert_contain "$stderr" "usage: server" "check go run ./server"
-    stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //server:server 2>&1)
-    assert_contain "$stderr" "usage: server" "check bazel run //server:server"
+    popd
+    stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //chapter$nb/server:server 2>&1)
+    assert_contain "$stderr" "usage: server" "check bazel run //chapter$nb/server:server"
 
+    pushd $pwd/chapter$nb
     stderr=$(go run ./client 2>&1)
     assert_contain "$stderr" "usage: client" "check go run ./client"
-    stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //client:client 2>&1)
-    assert_contain "$stderr" "usage: client" "check bazel run //client:client"
+    popd
+    stderr=$(bazel run --ui_event_filters=-info,-stdout,-stderr --noshow_progress //chapter$nb/client:client 2>&1)
+    assert_contain "$stderr" "usage: client" "check bazel run //chapter$nb/client:client"
   fi
 done

@@ -9,7 +9,6 @@
 pwd=$(pwd)
 
 for nb in $CHAPTERS_NB
-#for nb in ${CHAPTERS_NB[@]}
 do
 	if [ -d "$pwd/chapter$nb" ]
 	then
@@ -23,7 +22,8 @@ do
 			cd $pwd/chapter$nb/$dir
 			go get -u ./...
 			go mod tidy
-			bazel run //:gazelle-update-repos
 		done
 	fi
 done
+
+cd $pwd/chapter9 && bazel run //:gazelle-update-repos
