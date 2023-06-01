@@ -76,7 +76,7 @@ do
 	then
     echo "enter $pwd/chapter$nb"
     pushd $pwd/chapter$nb
-    buf generate proto
+    protoc -Iproto --go_out=proto --go_opt=paths=source_relative --go-grpc_out=proto --go-grpc_opt=paths=source_relative --validate_out="lang=go,paths=source_relative:proto" $(find . -type f -name "*.proto")
 
     stderr=$(go run ./server 2>&1)
     assert_contain "$stderr" "usage: server" "check go run ./server"

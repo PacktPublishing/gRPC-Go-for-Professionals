@@ -14,7 +14,7 @@ do
 	then
 		echo "enter $pwd/chapter$nb"
 		cd $pwd/chapter$nb
-		buf generate proto
+		protoc -Iproto --go_out=proto --go_opt=paths=source_relative --go-grpc_out=proto --go-grpc_opt=paths=source_relative --validate_out="lang=go,paths=source_relative:proto" $(find . -type f -name "*.proto")
 
 		for dir in server proto client
 		do
@@ -26,4 +26,7 @@ do
 	fi
 done
 
-cd $pwd/chapter9 && bazel run //:gazelle-update-repos
+if [ -d "$pwd/chapter9" ]
+then
+	cd $pwd/chapter9 && bazel run //:gazelle-update-repos
+fi
