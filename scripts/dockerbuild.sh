@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script is for maintenance of the projects.
 # It is supposed to be run inside a chapter folder.
 

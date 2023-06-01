@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script is for maintenance of the projects.
 # It cleans the different folders by removing
 # generated code and bazel builds.

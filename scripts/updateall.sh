@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script is for maintenance of the projects.
 # It updates all the dependencies for the different
 # go projects.
@@ -6,7 +8,8 @@
 
 pwd=$(pwd)
 
-for nb in ${CHAPTERS_NB[@]}
+for nb in $CHAPTERS_NB
+#for nb in ${CHAPTERS_NB[@]}
 do
 	if [ -d "$pwd/chapter$nb" ]
 	then

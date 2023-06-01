@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This script is used for testing that the application
 # can be run with `go run` and with `bazel run`.
 # Note: assert_contains was slightly modified but the original
