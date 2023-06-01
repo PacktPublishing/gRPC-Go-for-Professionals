@@ -1,1 +1,73 @@
-/Users/clement/Git/Implementing-gRPC-in-Golang-Microservice/WORKSPACE.bazel
+workspace(name = "github_com_packtpublishing_implementing_gRPC_in_Golang_Microservice")
+
+load(
+    "//:versions.bzl",
+    "GAZELLE_SHA256",
+    "GAZELLE_VERSION",
+    "GO_VERSION",
+    "PROTOC_GEN_VALIDATE_VERSION",
+    "PROTO_VERSION",
+    "RULES_GO_SHA256",
+    "RULES_GO_VERSION",
+)
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+# Rules_go
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = RULES_GO_SHA256,
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/%s/rules_go-%s.zip" % (RULES_GO_VERSION, RULES_GO_VERSION),
+        "https://github.com/bazelbuild/rules_go/releases/download/%s/rules_go-%s.zip" % (RULES_GO_VERSION, RULES_GO_VERSION),
+    ],
+)
+
+# Gazelle
+http_archive(
+    name = "bazel_gazelle",
+    sha256 = GAZELLE_SHA256,
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/%s/bazel-gazelle-%s.tar.gz" % (GAZELLE_VERSION, GAZELLE_VERSION),
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/%s/bazel-gazelle-%s.tar.gz" % (GAZELLE_VERSION, GAZELLE_VERSION),
+    ],
+)
+
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("//:deps.bzl", "go_dependencies")
+
+# gazelle:repository_macro deps.bzl%go_dependencies
+go_dependencies()
+
+go_rules_dependencies()
+
+go_register_toolchains(version = GO_VERSION)
+
+gazelle_dependencies(go_repository_default_config = "//:WORKSPACE.bazel")
+
+# Protobuf
+git_repository(
+    name = "com_google_protobuf",
+    remote = "https://github.com/protocolbuffers/protobuf",
+    tag = PROTO_VERSION,
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+# protoc-gen-validate
+git_repository(
+    name = "com_envoyproxy_protoc_gen_validate",
+    remote = "https://github.com/bufbuild/protoc-gen-validate",
+    tag = PROTOC_GEN_VALIDATE_VERSION,
+)
+
+load("@com_envoyproxy_protoc_gen_validate//bazel:repositories.bzl", "pgv_dependencies")
+load("@com_envoyproxy_protoc_gen_validate//:dependencies.bzl", "go_third_party")
+
+pgv_dependencies()
+
+# gazelle:repository_macro deps.bzl%go_third_party
+go_third_party()
