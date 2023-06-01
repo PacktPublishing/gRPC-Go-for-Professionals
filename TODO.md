@@ -1,0 +1,5 @@
+- [ ] add cover to main README.md
+- [ ] change name of repository to implementing-grpc-microservice-in-golang
+- [X] add chapter 9 to main README.md
+- [ ] add the description of book to main README.md
+- [X] chapter7 k8s doc

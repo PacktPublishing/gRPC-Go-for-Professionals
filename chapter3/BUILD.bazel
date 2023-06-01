@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "lib",
+    srcs = ["main.go"],
+    importpath = "",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//chapter3/proto",
+        "@org_golang_google_protobuf//proto",
+    ],
+)
+
+go_binary(
+    name = "chapter3",
+    embed = [":chapter3_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "chapter3_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//chapter3/proto",
+        "@org_golang_google_protobuf//proto",
+    ],
+)

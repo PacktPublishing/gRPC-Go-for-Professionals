@@ -18,7 +18,7 @@ proto_library(
 pgv_go_proto_library(
     name = "v2_go_proto",
     compilers = ["@io_bazel_rules_go//proto:go_grpc"],
-    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter8/proto/todo/v2",
+    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2",
     proto = ":v2_proto",
     deps = ["@com_envoyproxy_protoc_gen_validate//validate:validate_go"],
 )
@@ -26,6 +26,13 @@ pgv_go_proto_library(
 go_library(
     name = "todo",
     embed = [":v2_go_proto"],
-    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter8/proto/todo/v2",
+    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "v2",
+    srcs = ["todo.pb.validate.go"],
+    importpath = "",
     visibility = ["//visibility:public"],
 )

@@ -5,7 +5,7 @@ package todo.v2;
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter6/proto/todo/v2";
+option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2";
 
 message Task {
   uint64 id = 1;

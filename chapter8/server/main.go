@@ -15,7 +15,7 @@ import (
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/time/rate"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter8/proto/todo/v2"
+	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 

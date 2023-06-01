@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"google.golang.org/grpc"
@@ -10,6 +11,12 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+const authTokenKey string = "auth_token"
+const authTokenValue string = "authd"
+
+// validateAuthToken asserts that the authTokenKey
+// is present and associated with authTokenValue
+// in the current context header.
 func validateAuthToken(ctx context.Context) error {
 	md, ok := metadata.FromIncomingContext(ctx)
 
@@ -20,29 +27,31 @@ func validateAuthToken(ctx context.Context) error {
 		)
 	}
 
-	if t, ok := md["auth_token"]; ok {
+	if t, ok := md[authTokenKey]; ok {
 		switch {
 		case len(t) != 1:
 			return status.Errorf(
 				codes.InvalidArgument,
-				"auth_token should contain only 1 value",
+				fmt.Sprintf("%s should contain only 1 value", authTokenKey),
 			)
-		case t[0] != "authd":
+		case t[0] != authTokenValue:
 			return status.Errorf(
 				codes.Unauthenticated,
-				"incorrect auth_token",
+				fmt.Sprintf("incorrect %s", authTokenKey),
 			)
 		}
 	} else {
 		return status.Errorf(
 			codes.Unauthenticated,
-			"failed to get auth_token",
+			fmt.Sprintf("failed to get %s", authTokenKey),
 		)
 	}
 
 	return nil
 }
 
+// unaryAuthInterceptor calls validateAuthToken to determine wether to
+// continue with the current call or not.
 func unaryAuthInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	if err := validateAuthToken(ctx); err != nil {
 		return nil, err
@@ -51,6 +60,8 @@ func unaryAuthInterceptor(ctx context.Context, req interface{}, info *grpc.Unary
 	return handler(ctx, req)
 }
 
+// streamAuthInterceptor calls validateAuthToken to determine wether to
+// continue with the current call or not.
 func streamAuthInterceptor(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 	if err := validateAuthToken(ss.Context()); err != nil {
 		return err
@@ -59,11 +70,13 @@ func streamAuthInterceptor(srv interface{}, ss grpc.ServerStream, info *grpc.Str
 	return handler(srv, ss)
 }
 
+// unaryLogInterceptor logs the endpoints being called.
 func unaryLogInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	log.Println(info.FullMethod, "called")
 	return handler(ctx, req)
 }
 
+// streamLogInterceptor logs the endpoints being called.
 func streamLogInterceptor(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 	log.Println(info.FullMethod, "called")
 	return handler(srv, ss)

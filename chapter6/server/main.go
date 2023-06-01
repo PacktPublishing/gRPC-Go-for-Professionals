@@ -7,7 +7,7 @@ import (
 	"net"
 	"os"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter6/proto/todo/v2"
+	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
 	"google.golang.org/grpc"
 )
 

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dummy.v1;
 
-option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter4/proto/dummy/v1";
+option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/dummy/v1";
 
 message DummyMessage {}
 

@@ -19,8 +19,7 @@ RUN export PROTOC_VERSION=23.0 \
     && export PROTOC_ZIP=protoc-$PROTOC_VERSION-$PROTOC_OS-$PROTOC_ARCH.zip \
     && echo "downloading: " https://github.com/protocolbuffers/protobuf/releases/download/v$PROTOC_VERSION/$PROTOC_ZIP \
     && wget https://github.com/protocolbuffers/protobuf/releases/download/v$PROTOC_VERSION/$PROTOC_ZIP \
-    && unzip -o $PROTOC_ZIP -d /usr/local bin/protoc \
-    && unzip -o $PROTOC_ZIP -d /usr/local 'include/*' \
+    && unzip -o $PROTOC_ZIP -d /usr/local bin/protoc 'include/*' \
     && rm -f $PROTOC_ZIP
 
 FROM --platform=$BUILDPLATFORM golang:1.20-alpine as build
@@ -40,7 +39,7 @@ COPY ./proto .
 
 # generate code out of proto files
 WORKDIR /go
-ENV MODULE=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter7
+ENV MODULE=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice
 RUN protoc --go_out=src \
     --go_opt=module=$MODULE \
     --go-grpc_out=src \

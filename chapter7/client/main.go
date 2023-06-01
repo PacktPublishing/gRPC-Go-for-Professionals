@@ -17,9 +17,11 @@ import (
 
 	//"google.golang.org/grpc/encoding/gzip"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter7/proto/todo/v2"
+	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
 )
 
+// addTask calls the AddTask unary endpoint with a AddTaskRequest
+// generated from description and dueDate.
 func addTask(c pb.TodoServiceClient, description string, dueDate time.Time) uint64 {
 	req := &pb.AddTaskRequest{
 		Description: description,
@@ -44,6 +46,8 @@ func addTask(c pb.TodoServiceClient, description string, dueDate time.Time) uint
 	return res.Id
 }
 
+// printTasks calls the ListTasks server streaming endpoint
+// and displays the Tasks on stdout.
 func printTasks(c pb.TodoServiceClient, fm *fieldmaskpb.FieldMask) {
 	// ctx, cancel := context.WithCancel(context.Background())
 	// ctx, cancel := context.WithTimeout(context.Background(), 1*time.Millisecond)
@@ -79,6 +83,8 @@ func printTasks(c pb.TodoServiceClient, fm *fieldmaskpb.FieldMask) {
 	}
 }
 
+// updateTasks calls the UpdateTasks client streaming endpoint
+// with the provided reqs.
 func updateTasks(c pb.TodoServiceClient, reqs ...*pb.UpdateTasksRequest) {
 	ctx := context.Background()
 	stream, err := c.UpdateTasks(ctx)
@@ -109,6 +115,8 @@ func updateTasks(c pb.TodoServiceClient, reqs ...*pb.UpdateTasksRequest) {
 	}
 }
 
+// deleteTasks calls the DeleteTasks bidi streaming endpoint
+// with the provided reqs.
 func deleteTasks(c pb.TodoServiceClient, reqs ...*pb.DeleteTasksRequest) {
 	stream, err := c.DeleteTasks(context.Background())
 

@@ -19,6 +19,8 @@ type AccountsJSON struct {
 	Values []AccountJSON
 }
 
+// readFromJSON reads JSON data from accounts.json.
+// It returns the time (time.Duration) it took deserialize the data.
 func readFromJSON() time.Duration {
 	data, err := os.ReadFile("accounts.json")
 	if err != nil {
@@ -34,6 +36,8 @@ func readFromJSON() time.Duration {
 	return time.Since(start)
 }
 
+// readFromPB reads Protobuf data from accounts.bin.
+// It returns the time (time.Duration) it took deserialize the data.
 func readFromPB() time.Duration {
 	in, err := os.ReadFile("accounts.bin")
 	if err != nil {
@@ -49,8 +53,11 @@ func readFromPB() time.Duration {
 	return time.Since(start)
 }
 
+// the number of data samples.
 const sizeData int = 100
 
+// mean calculate the arithmetic mean of multiple time.Duration.
+// It returns the mean in milliseconds.
 func mean(data [sizeData]time.Duration) float64 {
 	var sum float64
 

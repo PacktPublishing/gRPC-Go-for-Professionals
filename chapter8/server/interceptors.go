@@ -12,6 +12,14 @@ import (
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 )
 
+const authTokenKey string = "auth_token"
+const authTokenValue string = "authd"
+
+// validateAuthToken asserts that the authTokenKey
+// is present and associated with authTokenValue
+// in the current context header.
+// It return a context if the auth token is valid,
+// otherwise it returns an error.
 func validateAuthToken(ctx context.Context) (context.Context, error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 
@@ -22,23 +30,23 @@ func validateAuthToken(ctx context.Context) (context.Context, error) {
 		)
 	}
 
-	if t, ok := md["auth_token"]; ok {
+	if t, ok := md[authTokenKey]; ok {
 		switch {
 		case len(t) != 1:
 			return nil, status.Errorf(
 				codes.InvalidArgument,
-				"auth_token should contain only 1 value",
+				fmt.Sprintf("%s should contain only 1 value", authTokenKey),
 			)
-		case t[0] != "authd":
+		case t[0] != authTokenValue:
 			return nil, status.Errorf(
 				codes.Unauthenticated,
-				"incorrect auth_token",
+				fmt.Sprintf("incorrect %s", authTokenKey),
 			)
 		}
 	} else {
 		return nil, status.Errorf(
 			codes.Unauthenticated,
-			"failed to get auth_token",
+			fmt.Sprintf("failed to get %s", authTokenKey),
 		)
 	}
 
@@ -48,6 +56,7 @@ func validateAuthToken(ctx context.Context) (context.Context, error) {
 const grpcService = 5 // "grpc.service"
 const grpcMethod = 7  //"grpc.method"
 
+// logCalls logs the endpoints being called in a service.
 func logCalls(l *log.Logger) logging.Logger {
 	return logging.LoggerFunc(func(_ context.Context, lvl logging.Level, msg string, fields ...any) {
 		// f := make(map[string]any, len(fields)/2)

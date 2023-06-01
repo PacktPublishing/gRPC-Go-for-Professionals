@@ -10,6 +10,7 @@
 * [Chapter 6 - Designing Effective APIs](chapter6)
 * [Chapter 7 - Out-of-the-box features](chapter7)
 * [Chapter 8 - More Essential Features](chapter8)
+* [Chapter 9 - Production-grade APIs](chapter9)
 
 ## Contributing
 

@@ -5,15 +5,19 @@ import (
 	"io"
 	"time"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter5/proto/todo/v1"
+	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v1"
 )
 
+// AddTask adds a Task to the database.
+// It returns the id of the newly inserted Task or an error.
 func (s *server) AddTask(_ context.Context, in *pb.AddTaskRequest) (*pb.AddTaskResponse, error) {
 	id, _ := s.d.addTask(in.Description, in.DueDate.AsTime())
 
 	return &pb.AddTaskResponse{Id: id}, nil
 }
 
+// ListTasks streams the Tasks present in the database.
+// It optionally returns an error if anything went wrong.
 func (s *server) ListTasks(req *pb.ListTasksRequest, stream pb.TodoService_ListTasksServer) error {
 	return s.d.getTasks(func(t interface{}) error {
 		task := t.(*pb.Task)
@@ -27,6 +31,9 @@ func (s *server) ListTasks(req *pb.ListTasksRequest, stream pb.TodoService_ListT
 	})
 }
 
+// UpdateTasks apply the updates needed to be made.
+// It reads the changes to be made through stream.
+// It optionally returns an error if anything went wrong.
 func (s *server) UpdateTasks(stream pb.TodoService_UpdateTasksServer) error {
 	for {
 		req, err := stream.Recv()
@@ -48,6 +55,10 @@ func (s *server) UpdateTasks(stream pb.TodoService_UpdateTasksServer) error {
 	}
 }
 
+// DeleteTasks deletes Tasks in the database.
+// It reads the changes to be made through stream.
+// For each change being applied it sends back an acknowledgement.
+// It optionally returns an error if anything went wrong.
 func (s *server) DeleteTasks(stream pb.TodoService_DeleteTasksServer) error {
 	for {
 		req, err := stream.Recv()
