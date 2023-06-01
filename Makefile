@@ -9,7 +9,7 @@ endif
 .DEFAULT_GOAL := help
 
 validate: ## Validates that all the project runs with go run and bazel run
-	./scripts/startupvalidator.sh -c
+	./scripts/startupvalidator.sh
 
 update: ## Updates all the projects
 	./scripts/updateall.sh
