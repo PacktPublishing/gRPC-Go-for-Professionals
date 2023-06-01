@@ -34,5 +34,16 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           go install github.com/envoyproxy/protoc-gen-validate@latest
+      - name: Run Update
+        run: make update
       - name: Run Validate
         run: make validate
+      - name: Commit the udpates (if it changed)
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            git config --global user.name 'Clement Jean'
+            git config --global user.email 'Clement-Jean@users.noreply.github.com'
+            git add *
+            git commit -m "Autoupdates of dependencies"
+            git push
+          fi
