@@ -36,12 +36,3 @@ jobs:
           go install github.com/envoyproxy/protoc-gen-validate@latest
       - name: Run Validate
         run: make validate
-      - name: Commit the udpates (if it changed)
-        run: |
-          if [[ `git status --porcelain` ]]; then
-            git config --global user.name 'Clement Jean'
-            git config --global user.email 'Clement-Jean@users.noreply.github.com'
-            git add *
-            git commit -m "Autoupdates of dependencies"
-            git push
-          fi
