@@ -38,9 +38,16 @@ func newMetricsServer(httpAddr string, reg *prometheus.Registry) *http.Server {
 }
 
 func newGrpcServer(lis net.Listener, srvMetrics *grpcprom.ServerMetrics) (*grpc.Server, error) {
-	creds, err := credentials.NewServerTLSFromFile("./certs/server_cert.pem", "./certs/server_key.pem")
-	if err != nil {
-		return nil, err
+	var credsOpt grpc.ServerOption
+	enableTls := os.Getenv("ENABLE_TLS") != "false"
+
+	if enableTls {
+		creds, err := credentials.NewServerTLSFromFile("./certs/server_cert.pem", "./certs/server_key.pem")
+		if err != nil {
+			return nil, err
+		}
+
+		credsOpt = grpc.Creds(creds)
 	}
 
 	logger := log.New(os.Stderr, "", log.Ldate|log.Ltime)
@@ -49,7 +56,6 @@ func newGrpcServer(lis net.Listener, srvMetrics *grpcprom.ServerMetrics) (*grpc.
 	// }
 
 	opts := []grpc.ServerOption{
-		grpc.Creds(creds),
 		grpc.ChainUnaryInterceptor(
 			//ratelimit.UnaryServerInterceptor(limiter),
 			otelgrpc.UnaryServerInterceptor(),
@@ -65,6 +71,11 @@ func newGrpcServer(lis net.Listener, srvMetrics *grpcprom.ServerMetrics) (*grpc.
 			logging.StreamServerInterceptor(logCalls(logger)),
 		),
 	}
+
+	if credsOpt != nil {
+		opts = append(opts, credsOpt)
+	}
+
 	s := grpc.NewServer(opts...)
 
 	pb.RegisterTodoServiceServer(s, &server{
