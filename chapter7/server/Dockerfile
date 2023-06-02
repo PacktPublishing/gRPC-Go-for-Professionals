@@ -13,7 +13,7 @@ FROM --platform=$BUILDPLATFORM alpine as protoc
 ARG BUILDPLATFORM TARGETOS TARGETARCH
 
 # download the protoc binary from github
-RUN export PROTOC_VERSION=23.0 \
+RUN export PROTOC_VERSION=23.2 \
     && export PROTOC_ARCH=$(uname -m | sed s/aarch64/aarch_64/) \
     && export PROTOC_OS=$(echo $TARGETOS | sed s/darwin/linux/) \
     && export PROTOC_ZIP=protoc-$PROTOC_VERSION-$PROTOC_OS-$PROTOC_ARCH.zip \
