@@ -7,7 +7,7 @@ This allow us to keep the book generic and update cheaply the versions.
 # The last version can be found here: https://go.dev/dl/
 # Note: You do not need to download the last version,
 #       Just update this variable. Bazel will download it for you.
-GO_VERSION = "1.20.2"
+GO_VERSION = "1.20.4"
 
 # Rules_go
 # The last version and SHA256 can be found here: https://github.com/bazelbuild/rules_go/releases
