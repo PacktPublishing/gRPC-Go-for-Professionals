@@ -1,0 +1,2 @@
+*.bazel linguist-detectable=false
+*.bzl linguist-detectable=false
