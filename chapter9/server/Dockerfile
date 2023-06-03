@@ -35,18 +35,18 @@ RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 RUN go install github.com/envoyproxy/protoc-gen-validate@latest
 
 # copy proto files into go/src/proto
-WORKDIR /go/src/proto
+WORKDIR /go/proto
 COPY ./proto .
 
 # generate code out of proto files
 WORKDIR /go
-RUN protoc -Isrc/proto \
-    --go_out=src/proto \
+RUN protoc -Iproto \
+    --go_out=proto \
     --go_opt=paths=source_relative \
-    --go-grpc_out=src/proto \
+    --go-grpc_out=proto \
     --go-grpc_opt=paths=source_relative \
-    --validate_out="lang=go,paths=source_relative:src/proto" \
-    src/proto/**/*.proto
+    --validate_out="lang=go,paths=source_relative:proto" \
+    proto/**/*.proto
 
 # copy code into go/src/app
 WORKDIR /go/src/app
