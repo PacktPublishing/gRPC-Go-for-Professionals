@@ -1,0 +1,61 @@
+node:
+  id: todo-envoy-proxy
+  cluster: grpc_cluster
+
+static_resources:
+  listeners:
+  - name: listener_grpc
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 50051
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: listener_http
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+          route_config:
+            name: route
+            virtual_hosts:
+            - name: vh
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: /todo.v2.TodoService
+                  grpc: {}
+                route:
+                  cluster: grpc_cluster
+      transport_socket:
+        name: envoy.transport_sockets.tls
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+              - certificate_chain:
+                  filename: ./certs/server_cert.pem
+                private_key:
+                  filename: ./certs/server_key.pem
+
+  clusters:
+  - name: grpc_cluster
+    type: STRICT_DNS
+    http2_protocol_options: {}
+    transport_socket:
+      name: envoy.transport_sockets.tls
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: grpc_cluster
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: "todo-server.default.svc.cluster.local"
+                port_value: 50051

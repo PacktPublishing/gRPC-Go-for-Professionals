@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-envoy
+spec:
+  clusterIP: None
+  ports:
+  - name: grpc
+    port: 50051
+  selector:
+    app: todo-envoy

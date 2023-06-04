@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-envoy
+  labels:
+    app: todo-envoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-envoy
+  template:
+    metadata:
+      labels:
+        app: todo-envoy
+    spec:
+      containers:
+      - name: todo-envoy
+        image: clementjean/grpc-go-packt-book:envoy-proxy
+        imagePullPolicy: Always
+        ports:
+        - name: grpc
+          containerPort: 50051
