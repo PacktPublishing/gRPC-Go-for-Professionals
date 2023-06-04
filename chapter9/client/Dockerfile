@@ -37,17 +37,25 @@ COPY --from=protoc /usr/local/include/google /usr/local/include/google
 RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
-# copy proto into go/src/proto
+# copy proto files into go/src/proto
 WORKDIR /go/src/proto
 COPY ./proto .
 
-# copy code into go/src/app
-WORKDIR /go/src/app
+# generate code out of proto files
+RUN protoc -I. \
+    --go_out=. \
+    --go_opt=paths=source_relative \
+    --go-grpc_out=. \
+    --go-grpc_opt=paths=source_relative \
+    **/*.proto
+
+# copy code into go/src/client
+WORKDIR /go/src/client
 COPY ./client .
 
 # download dependencies and build
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS="linux" GOARCH=$TARGETARCH go build -ldflags="-s -w" -o /go/bin/app
+RUN CGO_ENABLED=0 GOOS="linux" GOARCH=$TARGETARCH go build -ldflags="-s -w" -o /go/bin/client
 
 # here we use an alpine image because if we were using a scratch image (like in the server image)
 # we would not be able to pass SERVER_ADDR_ENV variable as command line arg.
@@ -59,6 +67,6 @@ ARG SERVER_ADDR="0.0.0.0:50051"
 COPY ./certs/ca_cert.pem ./certs/ca_cert.pem
 
 # copy the previously built binary into smaller image
-COPY --from=build /go/bin/app /
+COPY --from=build /go/bin/client /
 ENV SERVER_ADDR_ENV $SERVER_ADDR
-CMD /app ${SERVER_ADDR_ENV}
+CMD /client ${SERVER_ADDR_ENV}

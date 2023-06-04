@@ -47,16 +47,11 @@ RUN protoc -I. \
     --validate_out="lang=go,paths=source_relative:." \
     **/*.proto
 
-# copy code into go/src/app
+# copy code into go/src/server
 WORKDIR /go/src/server
 COPY ./server .
 
-# create go.work
-WORKDIR /go/src
-RUN go work init && go work use ./server ./proto
-
 # download dependencies and build
-WORKDIR /go/src/server
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="-s -w" -o /go/bin/server
 
@@ -69,4 +64,4 @@ COPY ./certs/server_key.pem ./certs/server_key.pem
 # copy the previously built binary into smaller image
 COPY --from=build /go/bin/server /
 EXPOSE 50051 50052
-CMD ["/app", "0.0.0.0:50051", "0.0.0.0:50052"]
+CMD ["/server", "0.0.0.0:50051", "0.0.0.0:50052"]
