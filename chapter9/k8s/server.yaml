@@ -32,8 +32,8 @@ spec:
     spec:
       containers:
       - name: todo-server
-        image: clementjean/packt-book:server
-        # imagePullPolicy: Always
+        image: clementjean/grpc-go-packt-book:server
+        imagePullPolicy: Always
         ports:
         - name: grpc
           containerPort: 50051
