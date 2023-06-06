@@ -1,5 +1,7 @@
 # Chapter 6 - APIs’ Design Considerations
 
+> This is based on the work done in chapter5 folder.
+
 This folder shows how to improve the API presented in the chapter5 folder. The main code for the implementations can be found in the following files:
 
 - [client/main.go](client/main.go)

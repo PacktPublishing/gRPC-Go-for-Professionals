@@ -1,5 +1,7 @@
 # Chapter 8 - More essential features
 
+> This is based on the work done in chapter7 folder.
+
 This folder shows other essential features (validating, tracing, rate limiting, ...) that can be added with [protoc-gen-validate](https://github.com/bufbuild/protoc-gen-validate) and [go-grpc-middleware](https://github.com/grpc-ecosystem/go-grpc-middleware). The main code for the implementations can be found in the following files:
 
 - [client/main.go](client/main.go)

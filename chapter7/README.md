@@ -1,5 +1,7 @@
 # Chapter 7 - Out of the box features
 
+> This is based on the work done in chapter6 folder.
+
 This folder shows how more advanced features that comes out of the box with gRPC (error handling, interceptors, load balancing, ...). The main code for the implementations can be found in the following files:
 
 - [client/main.go](client/main.go)

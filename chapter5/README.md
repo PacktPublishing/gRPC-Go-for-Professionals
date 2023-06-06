@@ -1,5 +1,7 @@
 # Chapter 5 - Type of gRPC Endpoints
 
+> This is based on the work done in chapter4 folder.
+
 This folder shows how to implement the different types of gRPC APIs (unary, server streaming, client streaming, and bidirectional streaming). The main code for the implementations can be found in the following files:
 
 - [client/main.go](client/main.go)
