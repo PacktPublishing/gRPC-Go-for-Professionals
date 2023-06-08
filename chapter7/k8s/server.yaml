@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: todo-server
-        image: clementjean/packt-book:server
+        image: clementjean/grpc-go-packt-book:server
         # imagePullPolicy: Always
         ports:
         - name: grpc
