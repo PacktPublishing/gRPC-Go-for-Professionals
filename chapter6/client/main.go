@@ -83,9 +83,7 @@ func updateTasks(c pb.TodoServiceClient, reqs ...*pb.UpdateTasksRequest) {
 		}
 	}
 
-	_, err = stream.CloseAndRecv()
-
-	if err != nil {
+	if _, err = stream.CloseAndRecv(); err != nil {
 		log.Fatalf("unexpected error: %v", err)
 	}
 }
