@@ -82,7 +82,7 @@ func (s *server) ListTasks(req *pb.ListTasksRequest, stream pb.TodoService_ListT
 				log.Printf("request deadline exceeded: %s", ctx.Err())
 			}
 			return ctx.Err()
-		// TODO: replace by default: on normal database communication
+		// TODO: replace following case by 'default:' replace by 'default:' on production APIs.
 		case <-time.After(1 * time.Millisecond):
 		}
 
