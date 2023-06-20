@@ -26,10 +26,15 @@ func serializedSize[D constraints.Integer, W protoreflect.ProtoMessage](data D, 
 }
 
 func main() {
-	var data int32 = 268435456
+	var data int32 = 268_435_456
 	i32 := &wrapperspb.Int32Value{
 		Value: data,
 	}
+
+	// var data uint64 = 72_057_594_037_927_936
+	// ui64 := &wrapperspb.UInt64Value{
+	//   Value: data,
+	// }
 
 	d, w := serializedSize(data, i32)
 	fmt.Printf("in memory: %d\npb: %d\n", d, w)

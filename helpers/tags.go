@@ -24,7 +24,7 @@ func serializedSize[M protoreflect.ProtoMessage](msg M) int {
 
 func main() {
 	t := &pb.Tags{}
-	tags := []int{1, 16, 2048, 262144, 33554432, 536870911}
+	tags := []int{1, 16, 2048, 262_144, 33_554_432, 536_870_911}
 	fields := []*int32{&t.Tag, &t.Tag2, &t.Tag3, &t.Tag4, &t.Tag5, &t.Tag6}
 
 	sz := serializedSize(t)

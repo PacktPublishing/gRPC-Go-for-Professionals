@@ -38,7 +38,7 @@ func compressedSize[M protoreflect.ProtoMessage](msg M) (int, int) {
 }
 
 func main() {
-	// var data int32 = 268435456
+	// var data int32 = 268_435_456
 	// i32 := &wrapperspb.Int32Value{
 	// 	Value: data,
 	// }
