@@ -1,7 +1,11 @@
 go 1.20
 
+// This workspace file is purely for maintenance.
+// Please check the workspace file in the chapter folders.
+
 use (
 	./chapter9/client
 	./chapter9/proto
 	./chapter9/server
+	./helpers
 )
