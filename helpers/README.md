@@ -5,7 +5,7 @@
 In order to build the proto files in the `proto` folder, you can run the following command:
 
 ```shell
-protoc -Iproto --go_out=proto --go_opt=paths=source_relative proto/*.proto
+protoc --go_out=. --go_opt=paths=source_relative proto/*.proto
 ```
 
 This should generate files and give you the following:
