@@ -18,14 +18,7 @@ const authTokenValue string = "authd"
 // is present and associated with authTokenValue
 // in the current context header.
 func validateAuthToken(ctx context.Context) error {
-	md, ok := metadata.FromIncomingContext(ctx)
-
-	if !ok {
-		return status.Errorf(
-			codes.DataLoss,
-			"failed to get metadata",
-		)
-	}
+	md, _ := metadata.FromIncomingContext(ctx)
 
 	if t, ok := md[authTokenKey]; ok {
 		switch {

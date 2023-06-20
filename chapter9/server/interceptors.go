@@ -21,14 +21,7 @@ const authTokenValue string = "authd"
 // It return a context if the auth token is valid,
 // otherwise it returns an error.
 func validateAuthToken(ctx context.Context) (context.Context, error) {
-	md, ok := metadata.FromIncomingContext(ctx)
-
-	if !ok {
-		return nil, status.Errorf(
-			codes.DataLoss,
-			"failed to get metadata",
-		)
-	}
+	md, _ := metadata.FromIncomingContext(ctx)
 
 	if t, ok := md[authTokenKey]; ok {
 		switch {
