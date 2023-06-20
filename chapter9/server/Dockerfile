@@ -3,7 +3,7 @@
 # e.g. to build for linux/arm64 (can also be linux/amd64) and load it in Docker
 # sudo docker buildx create  --name mybuild --driver=docker-container
 # sudo docker buildx build \
-# 	--tag clementjean/packt-book:server \
+# 	--tag clementjean/grpc-go-packt-book:server \
 # 	--file server/Dockerfile \
 # 	--platform linux/arm64 \
 # 	--builder mybuild \

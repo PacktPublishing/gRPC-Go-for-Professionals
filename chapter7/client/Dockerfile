@@ -6,12 +6,12 @@
 # e.g. to build for linux/arm64 (can also be linux/amd64), load it in Docker, and for k8s demo
 # sudo docker buildx create  --name mybuild --driver=docker-container
 # sudo docker buildx build \
-#		--tag clementjean/packt-book:client \
-#		--file client/Dockerfile \
-#		--build-arg SERVER_ADDR="dns:///todo-server.default.svc.cluster.local:50051" \
-#		--platform linux/arm64 \
-#		--builder mybuild \
-#		--load .
+# 		--tag clementjean/grpc-go-packt-book:client \
+# 		--file client/Dockerfile \
+# 		--build-arg SERVER_ADDR="dns:///todo-server.default.svc.cluster.local:50051" \
+# 		--platform linux/arm64 \
+# 		--builder mybuild \
+# 		--load .
 
 FROM --platform=$BUILDPLATFORM alpine:latest as protoc
 ARG BUILDPLATFORM TARGETARCH
