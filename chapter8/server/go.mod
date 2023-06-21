@@ -1,11 +1,11 @@
-module github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/server
+module github.com/PacktPublishing/gRPC-Go-for-Professionals/server
 
 go 1.20
 
-replace github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto => ../proto
+replace github.com/PacktPublishing/gRPC-Go-for-Professionals/proto => ../proto
 
 require (
-	github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto v0.0.0-20230601065932-82c46f0a6947
+	github.com/PacktPublishing/gRPC-Go-for-Professionals/proto v0.0.0-20230601065932-82c46f0a6947
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.0.0-rc.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.5
 	github.com/prometheus/client_golang v1.15.1

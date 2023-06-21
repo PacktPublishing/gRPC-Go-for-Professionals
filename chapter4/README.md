@@ -5,8 +5,8 @@ This folder is a template for gRPC project that is used throughout the remaining
 ## protoc
 
 ```shell
-$ protoc --go_out=. --go_opt=module=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice \
-  --go-grpc_out=. --go-grpc_opt=module=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice \
+$ protoc --go_out=. --go_opt=module=github.com/PacktPublishing/gRPC-Go-for-Professionals \
+  --go-grpc_out=. --go-grpc_opt=module=github.com/PacktPublishing/gRPC-Go-for-Professionals \
   proto/dummy/v1/dummy.proto
 $ go run ./server 0.0.0.0:50051
 listening at 0.0.0.0:50051

@@ -1,4 +1,4 @@
-workspace(name = "github_com_packtpublishing_implementing_gRPC_in_Golang_Microservice")
+workspace(name = "github_com_packtpublishing_grpc_go_for_professionals")
 
 load(
     "//:versions.bzl",

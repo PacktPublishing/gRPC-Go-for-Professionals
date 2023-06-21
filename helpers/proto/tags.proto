@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto";
+option go_package = "github.com/PacktPublishing/gRPC-Go-for-Professionals/helpers/proto";
 
 message Tags {
   int32 tag = 1;

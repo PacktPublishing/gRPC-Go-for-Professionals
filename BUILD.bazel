@@ -2,12 +2,12 @@ load("@bazel_gazelle//:def.bzl", "gazelle")
 
 # gazelle:exclude proto/**/*.go
 # gazelle:exclude helpers
-# gazelle:prefix github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice
+# gazelle:prefix github.com/PacktPublishing/gRPC-Go-for-Professionals
 # gazelle:resolve go google.golang.org/protobuf/types/known/fieldmaskpb @org_golang_google_protobuf//types/known/fieldmaskpb
 # gazelle:resolve go google.golang.org/protobuf/types/known/timestamppb @org_golang_google_protobuf//types/known/timestamppb
 # gazelle:resolve go google.golang.org/protobuf/types/known/anypb @org_golang_google_protobuf//types/known/anypb
-# gazelle:resolve go github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v1 //proto/todo/v1:todo
-# gazelle:resolve go github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2 //proto/todo/v2:todo
+# gazelle:resolve go github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v1 //proto/todo/v1:todo
+# gazelle:resolve go github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2 //proto/todo/v2:todo
 gazelle(name = "gazelle")
 
 gazelle(

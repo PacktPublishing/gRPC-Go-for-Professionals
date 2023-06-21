@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3/proto";
+option go_package = "github.com/PacktPublishing/gRPC-Go-for-Professionals/chapter3/proto";
 
 message Account {
   uint64 id = 1;

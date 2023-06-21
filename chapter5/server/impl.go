@@ -5,7 +5,7 @@ import (
 	"io"
 	"time"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v1"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v1"
 )
 
 // AddTask adds a Task to the database.

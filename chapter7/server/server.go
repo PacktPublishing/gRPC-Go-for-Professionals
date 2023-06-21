@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2"
 )
 
 type server struct {

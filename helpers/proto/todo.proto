@@ -4,7 +4,7 @@ package todo;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto";
+option go_package = "github.com/PacktPublishing/gRPC-Go-for-Professionals/helpers/proto";
 
 message Task {
   uint64 id = 1;

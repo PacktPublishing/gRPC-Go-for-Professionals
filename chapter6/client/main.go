@@ -13,7 +13,7 @@ import (
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2"
 )
 
 // addTask calls the AddTask unary endpoint with a AddTaskRequest

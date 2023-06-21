@@ -29,7 +29,7 @@ accounts.json.gz   650.103
 ```shell
 $ gzip -dk *.gz
 $ protoc --proto_path=proto \
-  --go_out=. --go_opt=module=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3 \
+  --go_out=. --go_opt=module=github.com/PacktPublishing/gRPC-Go-for-Professionals/chapter3 \
   proto/*.proto
 $ go run main.go
 JSON: 40.520000ms
@@ -40,7 +40,7 @@ PB: 9.450000ms
 
 ```shell
 $ protoc --proto_path=proto \
-  --go_out=. --go_opt=module=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3 \
-  --go-grpc_out=. --go-grpc_opt=module=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3 \
+  --go_out=. --go_opt=module=github.com/PacktPublishing/gRPC-Go-for-Professionals/chapter3 \
+  --go-grpc_out=. --go-grpc_opt=module=github.com/PacktPublishing/gRPC-Go-for-Professionals/chapter3 \
   proto/*.proto
 ```

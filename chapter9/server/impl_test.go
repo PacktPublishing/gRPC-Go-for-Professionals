@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"

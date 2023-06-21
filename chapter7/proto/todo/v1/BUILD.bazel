@@ -12,7 +12,7 @@ proto_library(
 go_proto_library(
     name = "v1_go_proto",
     compilers = ["@io_bazel_rules_go//proto:go_grpc"],
-    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v1",
+    importpath = "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v1",
     proto = ":v1_proto",
     visibility = ["//visibility:public"],
 )
@@ -20,6 +20,6 @@ go_proto_library(
 go_library(
     name = "todo",
     embed = [":v1_go_proto"],
-    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v1",
+    importpath = "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v1",
     visibility = ["//visibility:public"],
 )

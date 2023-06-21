@@ -7,7 +7,7 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/helpers/proto"
 )
 
 // serializedSize calculates the serialized size of the msg.

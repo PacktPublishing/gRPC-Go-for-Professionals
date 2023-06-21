@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"

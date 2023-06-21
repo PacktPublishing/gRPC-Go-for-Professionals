@@ -39,7 +39,7 @@ COPY ./proto .
 
 # generate code out of proto files
 WORKDIR /go
-ENV MODULE=github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice
+ENV MODULE=github.com/PacktPublishing/gRPC-Go-for-Professionals
 RUN protoc --go_out=src \
     --go_opt=module=$MODULE \
     --go-grpc_out=src \

@@ -11,7 +11,7 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/helpers/proto"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/helpers/proto"
 )
 
 // compressedSize calculates the number of bytes after compression with gzip.

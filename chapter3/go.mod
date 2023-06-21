@@ -1,4 +1,4 @@
-module github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3
+module github.com/PacktPublishing/gRPC-Go-for-Professionals/chapter3
 
 go 1.20
 

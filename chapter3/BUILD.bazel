@@ -20,7 +20,7 @@ go_binary(
 go_library(
     name = "chapter3_lib",
     srcs = ["main.go"],
-    importpath = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/chapter3",
+    importpath = "github.com/PacktPublishing/gRPC-Go-for-Professionals/chapter3",
     visibility = ["//visibility:private"],
     deps = [
         "//chapter3/proto",

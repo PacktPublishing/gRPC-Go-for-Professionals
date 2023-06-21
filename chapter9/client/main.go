@@ -18,7 +18,7 @@ import (
 
 	//"google.golang.org/grpc/encoding/gzip"
 
-	pb "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice/proto/todo/v2"
+	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2"
 
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/retry"
 )

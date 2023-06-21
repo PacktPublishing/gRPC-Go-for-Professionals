@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/PacktPublishing/Implementing-gRPC-in-Golang-Microservice";
+option go_package = "github.com/PacktPublishing/gRPC-Go-for-Professionals";
 
 enum AccountRight {
   ACCOUNT_RIGHT_UNSPECIFIED = 0;
