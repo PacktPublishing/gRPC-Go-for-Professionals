@@ -23,8 +23,20 @@ do
 			go get -u ./...
 			go mod tidy
 		done
+
+		go work sync
 	fi
 done
+
+echo "enter $pwd/helpers"
+cd $pwd/helpers
+go get -u ./...
+go mod tidy
+
+echo "enter $pwd/proto"
+cd $pwd/proto
+go get -u ./...
+go mod tidy
 
 if [ -d "$pwd/chapter9" ]
 then
