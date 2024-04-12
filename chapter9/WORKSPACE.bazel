@@ -1,5 +1,7 @@
 workspace(name = "github_com_packtpublishing_grpc_go_for_professionals")
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load(
     "//:versions.bzl",
     "GAZELLE_SHA256",
@@ -10,8 +12,6 @@ load(
     "RULES_GO_SHA256",
     "RULES_GO_VERSION",
 )
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 # Rules_go
 http_archive(
@@ -33,8 +33,8 @@ http_archive(
     ],
 )
 
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 load("//:deps.bzl", "go_dependencies")
 
 # gazelle:repository_macro deps.bzl%go_dependencies
@@ -65,9 +65,9 @@ git_repository(
 )
 
 load("@com_envoyproxy_protoc_gen_validate//bazel:repositories.bzl", "pgv_dependencies")
-load("@com_envoyproxy_protoc_gen_validate//:dependencies.bzl", "go_third_party")
 
 pgv_dependencies()
 
-# gazelle:repository_macro deps.bzl%go_third_party
+load("@com_envoyproxy_protoc_gen_validate//:dependencies.bzl", "go_third_party")
+
 go_third_party()

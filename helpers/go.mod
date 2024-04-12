@@ -1,9 +1,9 @@
 module github.com/PacktPublishing/gRPC-Go-for-Professionals/helpers
 
-go 1.20
+go 1.22
 
 require (
-	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225
+	golang.org/x/exp v0.0.0-20240409090435-93d18d7e34b8
 	google.golang.org/protobuf v1.33.0
 )
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"log"
+	"slices"
 	"time"
 
 	pb "github.com/PacktPublishing/gRPC-Go-for-Professionals/proto/todo/v2"
@@ -12,8 +13,6 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
-
-	"golang.org/x/exp/slices"
 )
 
 // Filter applies a mask (FieldMask) to a msg.
