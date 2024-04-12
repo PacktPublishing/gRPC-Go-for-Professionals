@@ -20,25 +20,21 @@ do
 		do
 			echo "enter $dir"
 			cd $pwd/chapter$nb/$dir
-			go get -u ./...
+			go get -u -d ./...
 			go mod tidy
 		done
 
 		go work sync
+		bazel run //:gazelle-update-repos
 	fi
 done
 
 echo "enter $pwd/helpers"
 cd $pwd/helpers
-go get -u ./...
+go get -u -d ./...
 go mod tidy
 
 echo "enter $pwd/proto"
 cd $pwd/proto
-go get -u ./...
+go get -u -d ./...
 go mod tidy
-
-if [ -d "$pwd/chapter9" ]
-then
-	cd $pwd/chapter9 && bazel run //:gazelle-update-repos
-fi
