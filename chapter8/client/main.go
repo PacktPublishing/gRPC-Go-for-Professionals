@@ -96,12 +96,7 @@ func updateTasks(c pb.TodoServiceClient, reqs ...*pb.UpdateTasksRequest) {
 	}
 
 	for _, req := range reqs {
-		err := stream.Send(req)
-		if err != nil {
-			return
-		}
-
-		if err != nil {
+		if err := stream.Send(req); err != nil {
 			log.Fatalf("unexpected error: %v", err)
 		}
 
