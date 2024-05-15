@@ -22,14 +22,13 @@ In gRPC Go for Professionals, you’ll explore core concepts such as message tra
 
 If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1837638845) today!
 
-<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
-alt="https://www.packtpub.com/" border="5" /></a>
+<a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" alt="https://www.packtpub.com/" border="5" /></a>
 
 ## Instructions and Navigations
 All of the code is organized into folders. For example, Chapter02.
 
 The code will look like the following:
-```
+```proto
 message AddTaskRequest {
      string description = 1;
      google.protobuf.Timestamp due_date = 2;
@@ -43,12 +42,11 @@ With the following software and hardware list you can run all code files present
 ## Software and Hardware List
 | Chapter | Software required | OS required |
 | -------- | ------------------------------------ | ----------------------------------- |
-| 1 | Go 1.20.4 | Windows, Mac OS X, and Linux (Any) |
-| 1 | Protobuf 23.2 | Windows, Mac OS X, and Linux (Any) |
-| 1 | gRPC 1.55.0 | Windows, Mac OS X, and Linux (Any) |
-| 1 | Buf 1.15.1  | Windows, Mac OS X, and Linux (Any) |
-| 1 | Bazel 6.2.1 | Windows, Mac OS X, and Linux (Any) |
-
+| 4-9 | Go 1.20.4 | Windows, Mac OS X, and Linux (Any) |
+| 2-9 | Protobuf 23.2 | Windows, Mac OS X, and Linux (Any) |
+| 3-9 | gRPC 1.55.0 | Windows, Mac OS X, and Linux (Any) |
+| 4-9 | Buf 1.15.1  | Windows, Mac OS X, and Linux (Any) |
+| 4-9 | Bazel 6.2.1 | Windows, Mac OS X, and Linux (Any) |
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it]( https://packt.link/LEms7).
 
@@ -64,7 +62,6 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 * [Chapter 8 - More Essential Features](chapter8)
 * [Chapter 9 - Production-grade APIs](chapter9)
 
-
 ## Contributing
 
 There main ways in which you can contribute are the following:
@@ -78,11 +75,6 @@ There main ways in which you can contribute are the following:
 
 * Event-Driven Architecture in Golang [[Packt]](https://www.packtpub.com/product/event-driven-architecture-in-golang/9781803238012?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1803238011)
 
-
-
 ## Get to Know the Author
 **Clément Jean**
 is the CTO of Education for Ethiopia, a start-up focusing on educating K-12 students in Ethiopia. On top of that, he is also an online instructor (on Udemy, Linux Foundation, and others) teaching people about different kinds of technologies. In both his occupations, he deals with technologies such as gRPC and how to apply them to real-life use cases. His overall goal is to empower people through education and technology.
-
-
-
